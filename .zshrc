@@ -125,3 +125,4 @@ bindkey -v
 if [[ -f .morerc ]]
 then
 	source .morerc
+fi
