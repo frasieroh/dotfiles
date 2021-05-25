@@ -13,6 +13,7 @@ if [ -d "/home/frasier/" ]
 then
     export ZSH="/home/frasier/.oh-my-zsh"
 elif [ -d "/home/ofrasier" ]
+then
     export ZSH="/home/ofrasier/.oh-my-zsh"
 else [ -d "/Users/ofrasier" ]
     export ZSH="/home/ofrasier/.oh-my-zsh"
