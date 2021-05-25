@@ -16,7 +16,7 @@ elif [ -d "/home/ofrasier" ]
 then
     export ZSH="/home/ofrasier/.oh-my-zsh"
 else [ -d "/Users/ofrasier" ]
-    export ZSH="/home/ofrasier/.oh-my-zsh"
+    export ZSH="/Users/ofrasier/.oh-my-zsh"
 fi
 
 # Set name of the theme to load --- if set to "random", it will
