@@ -22,12 +22,17 @@ set wildmenu
 set hlsearch
 colorscheme PaperColor
 
+nmap ` :NERDTreeToggle<CR>
+nmap [ :vs \| :ALEGoToDefinition<CR>
+nmap ] :vs \| :ALEFindReferences<CR>
+nmap = :ALEHover<CR>
+
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 1
 
 let g:ale_linters = {
 \   'tac': ['artaclsp'],
-\   'python': ['pylsp', 'pylint'],
+\   'python': ['pyright'],
 \   'cpp': ['clangd'],
 \   'c': ['clangd'],
 \}

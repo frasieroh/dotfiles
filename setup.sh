@@ -23,7 +23,7 @@ curl -sL git.io/antigen > $HOME/.antigen.zsh
 echo 'Install vim-plug and plugins...'
 curl -sfLo ~/.vim/autoload/plug.vim --create-dirs \
 	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-vim -es -u vimrc -i NONE -c "PlugInstall" -c "qa"
+vim -es -u $HOME/.vimrc -i NONE -c "PlugInstall" -c "qa"
 
 # Use zsh for interactive shells
 echo 'Use zsh for interactive shells...'
