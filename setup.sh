@@ -12,14 +12,14 @@ curl -sL git.io/antigen > $HOME/.antigen.zsh
 echo 'Install vim-plug and plugins...'
 curl -sfLo ~/.vim/autoload/plug.vim --create-dirs \
 	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-vim +PlugInstall +qall
+vim -es -u vimrc -i NONE -c "PlugInstall" -c "qa"
 
 # Add symbolic links to home directory (admittedly this is crude)
 echo 'Link dotfiles...'
-rm $HOME/.tmux.conf
-rm $HOME/.p10k.zsh
-rm $HOME/.zshrc
-rm $HOMR/.vimrc
+rm -f $HOME/.tmux.conf
+rm -f $HOME/.p10k.zsh
+rm -f $HOME/.zshrc
+rm -f $HOME/.vimrc
 ln -s .tmux.conf $HOME/.tmux.conf
 ln -s .p10k.zsh $HOME/.p10k.zsh
 ln -s .zshrc $HOME/.zshrc
