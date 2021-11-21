@@ -11,15 +11,16 @@ fi
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-if [ -d "/home/frasier/" ]
-then
-    export ZSH="/home/frasier/.oh-my-zsh"
-elif [ -d "/home/ofrasier" ]
-then
-    export ZSH="/home/ofrasier/.oh-my-zsh"
-else [ -d "/Users/ofrasier" ]
-    export ZSH="/Users/ofrasier/.oh-my-zsh"
-fi
+#if [ -d "/home/frasier/" ]
+#then
+#    export ZSH="/home/frasier/.oh-my-zsh"
+#elif [ -d "/home/ofrasier" ]
+#then
+#    export ZSH="/home/ofrasier/.oh-my-zsh"
+#else [ -d "/Users/ofrasier" ]
+#    export ZSH="/Users/ofrasier/.oh-my-zsh"
+#fi
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -41,7 +42,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to automatically update without prompting.
 # DISABLE_UPDATE_PROMPT="true"
@@ -87,11 +88,21 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-vi-mode zsh-completions zsh-autosuggestions zsh-syntax-highlighting)
-autoload -U compinit && compinit
+#plugins=(git zsh-vi-mode zsh-completions zsh-autosuggestions zsh-syntax-highlighting)
+#autoload -U compinit && compinit
+#source $ZSH/oh-my-zsh.sh
+source ~/.antigen.zsh
 
+antigen use oh-my-zsh
+antigen bundle git
+antigen bundle jeffreytse/zsh-vi-mode
+antigen bundle zsh-users/zsh-completions
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-syntax-highlighting
 
-source $ZSH/oh-my-zsh.sh
+antigen theme romkatv/powerlevel10k
+
+antigen apply
 
 # User configuration
 
@@ -123,8 +134,6 @@ bindkey -v
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ ! -f ~/.morerc ]] || source ~/.morerc
 
-if [[ -f .morerc ]]
-then
-	source .morerc
-fi
+# Run antigen
