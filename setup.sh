@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# Add symbolic links to home directory (admittedly this is crude)
+echo 'Link dotfiles...'
+rm -f $HOME/.tmux.conf
+rm -f $HOME/.p10k.zsh
+rm -f $HOME/.zshrc
+rm -f $HOME/.vimrc
+ln -s $PWD/.tmux.conf $HOME/.tmux.conf
+ln -s $PWD/.p10k.zsh $HOME/.p10k.zsh
+ln -s $PWD/.zshrc $HOME/.zshrc
+ln -s $PWD/.vimrc $HOME/.vimrc
+
 # Install oh-my-zsh and antigen
 echo 'Install oh-my-zsh...'
 export CHSH=no
@@ -13,17 +24,6 @@ echo 'Install vim-plug and plugins...'
 curl -sfLo ~/.vim/autoload/plug.vim --create-dirs \
 	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 vim -es -u vimrc -i NONE -c "PlugInstall" -c "qa"
-
-# Add symbolic links to home directory (admittedly this is crude)
-echo 'Link dotfiles...'
-rm -f $HOME/.tmux.conf
-rm -f $HOME/.p10k.zsh
-rm -f $HOME/.zshrc
-rm -f $HOME/.vimrc
-ln -s .tmux.conf $HOME/.tmux.conf
-ln -s .p10k.zsh $HOME/.p10k.zsh
-ln -s .zshrc $HOME/.zshrc
-ln -s .vimrc $HOME/.vimrc
 
 # Use zsh for interactive shells
 echo 'Use zsh for interactive shells...'
