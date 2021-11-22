@@ -37,7 +37,7 @@ let g:ale_linters = {
 \   'c': ['clangd'],
 \}
 
-# Pyright for typechecking only; no language stuff please
+" Pyright for typechecking only; no language stuff please
 let b:ale_python_pyright_config = {
 \ 'pyright': {
 \   'disableLanguageServices': v:true,
