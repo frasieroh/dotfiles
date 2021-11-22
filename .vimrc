@@ -32,9 +32,16 @@ let g:ale_lint_on_insert_leave = 1
 
 let g:ale_linters = {
 \   'tac': ['artaclsp'],
-\   'python': ['pyright'],
+\   'python': ['pyright', 'pylint'],
 \   'cpp': ['clangd'],
 \   'c': ['clangd'],
+\}
+
+# Pyright for typechecking only; no language stuff please
+let b:ale_python_pyright_config = {
+\ 'pyright': {
+\   'disableLanguageServices': v:true,
+\ },
 \}
 
 " Optional local configuration
