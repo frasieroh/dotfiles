@@ -25,12 +25,4 @@ curl -sfLo ~/.vim/autoload/plug.vim --create-dirs \
 	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 vim -es -u $HOME/.vimrc -i NONE -c "PlugInstall" -c "qa"
 
-# Use zsh for interactive shells
-echo 'Use zsh for interactive shells...'
-cat << EOF >> ~/.bashrc
-case \$- in
-	(*i*) test -z "\$ARTEST_RANDSEED" -a -f \$(which zsh) && exec \$(which zsh);;
-esac
-EOF
-
 echo 'All done!'
