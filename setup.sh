@@ -17,7 +17,7 @@ export CHSH=no
 export RUNZSH=no
 export KEEP_ZSHRC=yes
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-curl -sL git.io/antigen > $HOME/.antigen.zsh
+curl -sL git.io/antigen > $HOME/antigen.zsh
 
 # Install vim-plug and plugins
 echo 'Install vim-plug and plugins...'
