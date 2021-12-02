@@ -45,6 +45,6 @@ let b:ale_python_pyright_config = {
 \}
 
 " Optional local configuration
-if filereadable( "~/.morevimrc" )
+if filereadable( expand( '~/.morevimrc' ) )
 	so ~/.morevimrc
 endif
