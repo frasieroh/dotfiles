@@ -5,6 +5,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'dense-analysis/ale'
 Plug 'preservim/nerdtree'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
@@ -14,12 +16,11 @@ set cursorline
 set tabpagemax=20
 set clipboard=exclude:.*
 set colorcolumn=100
-set tabstop=4
-set shiftwidth=4
 set background=dark
 set showcmd
 set wildmenu
 set hlsearch
+set autoindent
 colorscheme PaperColor
 
 nmap ` :NERDTreeToggle<CR>
@@ -43,8 +44,3 @@ let b:ale_python_pyright_config = {
 \   'disableLanguageServices': v:true,
 \ },
 \}
-
-" Optional local configuration
-if filereadable( expand( '~/.morevimrc' ) )
-	so ~/.morevimrc
-endif
