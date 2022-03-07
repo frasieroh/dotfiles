@@ -24,8 +24,8 @@ set autoindent
 colorscheme PaperColor
 
 nmap ` :NERDTreeToggle<CR>
-nmap [ :vs \| :ALEGoToDefinition<CR>
-nmap ] :vs \| :ALEFindReferences<CR>
+nmap [ :ALEGoToDefinition<CR>
+nmap ] :ALEFindReferences<CR>
 nmap = :ALEHover<CR>
 
 let g:ale_lint_on_text_changed = 'never'

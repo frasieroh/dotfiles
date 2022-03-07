@@ -1,7 +1,6 @@
 ZSH_DISABLE_COMPFIX=true
 
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
 export ZSH=$HOME/.oh-my-zsh
 
 DISABLE_AUTO_UPDATE="true"
@@ -20,4 +19,5 @@ antigen apply
 
 bindkey -v
 
-[[ ! -f ~/.morerc ]] || source ~/.morerc
+# Source another optional script for system-dependent stuff
+[[ ! -f ~/.zshrc2 ]] || source ~/.zshrc2
