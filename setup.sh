@@ -3,15 +3,17 @@
 OS=''
 if [[ $OSTYPE == linux* ]]
 then
-	OS='linux64'
+	NVIM_DL_NAME='nvim-linux64'
+	NVIM_DIR_NAME='nvim-linux64'
 fi
 if [[ $OSTYPE == darwin* ]]
 then
-	OS='macos'
+	NVIM_DL_NAME='nvim-macos'
+	NVIM_DIR_NAME='nvim-osx64'
 fi
-if [[ $OS == "" ]]
+if [[ $NVIM_DL_NAME == "" ]]
 then
-	echo 'OS not detected'
+	echo 'Fuck!'
 	exit 1
 fi
 
@@ -39,15 +41,13 @@ ln -s $PWD/init.vim $NVIM_CONFIG_HOME/init.vim
 
 echo 'Install neovim...'
 NVIM_V='v0.7.0'
-NVIM_NAME="nvim-$OS"
 NVIM_PATH="$HOME/.local/bin/nvim"
-wget -O - https://github.com/neovim/neovim/releases/download/$NVIM_V/$NVIM_NAME.tar.gz | tar zxf -
+wget -O - https://github.com/neovim/neovim/releases/download/$NVIM_V/$NVIM_DL_NAME.tar.gz | tar zxf -
 mkdir -p $HOME/.local/bin
-mv -f $NVIM_NAME/bin/nvim $NVIM_PATH
-cp -rT $NVIM_NAME/share/nvim/runtime $NVIM_CONFIG_HOME
-rm -rf $NVIM_NAME
+mv -f $NVIM_DIR_NAME/bin/nvim $NVIM_PATH
+cp -R $NVIM_DIR_NAME/share/nvim/runtime/ $NVIM_CONFIG_HOME
+rm -rf $NVIM_DIR_NAME
 
-# Install zim
 echo 'Install zim...'
 export ZIM_HOME=$HOME/.zim
 if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
@@ -57,10 +57,8 @@ fi
 zsh $ZIM_HOME/zimfw.zsh init
 zsh $ZIM_HOME/zimfw.zsh install
 
-# Install vim-plug and plugins
 echo 'Install vim-plug and plugins...'
 curl -sfLo ~/.vim/autoload/plug.vim --create-dirs \
 	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-$NVIM_PATH -es -u $HOME/.vimrc -i NONE -c "PlugInstall" -c "qa"
 
-echo 'All done!'
+echo 'All done! Run :PlugInstall to update vim.'
