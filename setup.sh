@@ -37,12 +37,13 @@ else
 	mkdir -p $HOME/.config/nvim
 	NVIM_CONFIG_HOME=$HOME/.config/nvim
 fi
+rm -f $NVIM_CONFIG_HOME/init.vim
 ln -s $PWD/init.vim $NVIM_CONFIG_HOME/init.vim
 
 echo 'Install neovim...'
 NVIM_V='v0.7.0'
 NVIM_PATH="$HOME/.local/bin/nvim"
-wget -O - https://github.com/neovim/neovim/releases/download/$NVIM_V/$NVIM_DL_NAME.tar.gz | tar zxf -
+curl -L https://github.com/neovim/neovim/releases/download/$NVIM_V/$NVIM_DL_NAME.tar.gz | tar zxf -
 mkdir -p $HOME/.local/bin
 mv -f $NVIM_DIR_NAME/bin/nvim $NVIM_PATH
 cp -R $NVIM_DIR_NAME/share/nvim/runtime/ $NVIM_CONFIG_HOME
@@ -60,5 +61,6 @@ zsh $ZIM_HOME/zimfw.zsh install
 echo 'Install vim-plug and plugins...'
 curl -sfLo ~/.vim/autoload/plug.vim --create-dirs \
 	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-echo 'All done! Run :PlugInstall to update vim.'
+$NVIM_PATH -c 'PlugInstall | qa'
+zsh $ZIM_HOME/zimfw.zsh list
+echo 'All done!'
