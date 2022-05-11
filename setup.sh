@@ -44,7 +44,7 @@ NVIM_PATH="$HOME/.local/bin/nvim"
 wget -O - https://github.com/neovim/neovim/releases/download/$NVIM_V/$NVIM_NAME.tar.gz | tar zxf -
 mkdir -p $HOME/.local/bin
 mv -f $NVIM_NAME/bin/nvim $NVIM_PATH
-mv -f $NVIM_NAME/share/nvim/runtime/* $NVIM_CONFIG_HOME/
+cp -rT $NVIM_NAME/share/nvim/runtime $NVIM_CONFIG_HOME
 rm -rf $NVIM_NAME
 
 # Install zim
@@ -55,7 +55,7 @@ if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
       https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
 fi
 zsh $ZIM_HOME/zimfw.zsh init
-zsh $ZIM_HOME/zimfw.zsh zimfw install
+zsh $ZIM_HOME/zimfw.zsh install
 
 # Install vim-plug and plugins
 echo 'Install vim-plug and plugins...'
