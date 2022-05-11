@@ -8,7 +8,6 @@ Plug 'preservim/nerdtree'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-fugitive'
 " Neovim plugins
-Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-neorg/neorg'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-treesitter/nvim-treesitter'
