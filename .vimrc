@@ -46,3 +46,8 @@ let b:ale_python_pyright_config = {
 \   'disableLanguageServices': v:true,
 \ },
 \}
+
+command! -nargs=1 Gtd Neorg gtd <args>
+command! -nargs=1 Journal Neorg journal <args>
+
+autocmd FileType norg setlocal spell
