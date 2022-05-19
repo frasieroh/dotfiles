@@ -12,11 +12,8 @@ else
 	mkdir -p $HOME/.config/nvim
 	NVIM_CONFIG_HOME=$HOME/.config/nvim
 fi
-# I think there's a bug in neovim. Without this syntax highlighting does
-# not work, even though this is already in the runtime path!
-export VIMRUNTIME=$NVIM_CONFIG_HOME
-alias vi=$(which nvim)
-alias vim=$(which nvim)
+alias vi=nvim
+alias vim=nvim
 
 # Source another optional script for system-dependent stuff
 [[ ! -f ~/.zshrc2 ]] || source ~/.zshrc2

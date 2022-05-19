@@ -4,15 +4,14 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'dense-analysis/ale'
-Plug 'preservim/nerdtree'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-fugitive'
 " Neovim plugins
+Plug 'kyazdani42/nvim-tree.lua'
 Plug 'nvim-neorg/neorg'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-lualine/lualine.nvim'
-
 
 call plug#end()
 
@@ -28,7 +27,7 @@ set hlsearch
 set autoindent
 colorscheme PaperColor
 
-nmap ` :NERDTreeToggle<CR>
+nmap ` :NvimTreeToggle<CR>
 nmap [ :ALEGoToDefinition<CR>
 nmap ] :ALEFindReferences<CR>
 nmap = :ALEHover<CR>
