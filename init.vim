@@ -34,4 +34,41 @@ require('nvim-treesitter.configs').setup {
 		enable = true,
 	}
 }
+require('lualine').setup {
+options = {
+	theme = {
+		normal = {
+			a = { fg = '#C6C6C6', bg = '#3A3A3A' },
+			b = { fg = '#B2B2B2', bg = '#303030' },
+			c = { fg = '#B2B2B2', bg = '#303030' },
+			x = { fg = '#B2B2B2', bg = '#303030' },
+			y = { fg = '#B2B2B2', bg = '#303030' },
+			z = { fg = '#C6C6C6', bg = '#3A3A3A' },
+		},
+		inactive = {
+			a = { fg = '#B2B2B2', bg = '#303030' },
+			b = { fg = '#C6C6C6', bg = '#3A3A3A' },
+			c = { fg = '#C6C6C6', bg = '#3A3A3A' },
+			x = { fg = '#C6C6C6', bg = '#3A3A3A' },
+			y = { fg = '#C6C6C6', bg = '#3A3A3A' },
+			z = { fg = '#B2B2B2', bg = '#303030' },
+		}
+	},
+	icons_enabled = false,
+	section_separators = {left = '', right = ''},
+	component_separators = {left = '', right = ''},
+},
+sections = {
+	lualine_a = {'branch'},
+	lualine_b = {'filename'},
+	lualine_c = {''},
+	lualine_x = {''},
+	lualine_y = {'filetype', 'progress', 'location'},
+	lualine_z = {''}
+},
+tabline = {
+	lualine_a = {'tabs'},
+	lualine_z = {'buffers'},
+},
+}
 EOF

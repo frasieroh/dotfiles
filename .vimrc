@@ -11,6 +11,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'nvim-neorg/neorg'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-lualine/lualine.nvim'
+
 
 call plug#end()
 
@@ -30,6 +32,12 @@ nmap ` :NERDTreeToggle<CR>
 nmap [ :ALEGoToDefinition<CR>
 nmap ] :ALEFindReferences<CR>
 nmap = :ALEHover<CR>
+
+nmap <S-h> :bp<CR>
+nmap <S-l> :bn<CR>
+" Alt + h, l respectively
+nmap ˙ :tabprevious<CR>
+nmap ¬ :tabnext<CR>
 
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 1
