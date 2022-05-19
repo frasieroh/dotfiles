@@ -46,7 +46,7 @@ NVIM_PATH="$HOME/.local/bin/nvim"
 curl -L https://github.com/neovim/neovim/releases/download/$NVIM_V/$NVIM_DL_NAME.tar.gz | tar zxf -
 mkdir -p $HOME/.local/bin
 mv -f $NVIM_DIR_NAME/bin/nvim $NVIM_PATH
-cp -R $NVIM_DIR_NAME/share/nvim/runtime/ $NVIM_CONFIG_HOME
+cp -R $NVIM_DIR_NAME/share/nvim/runtime/* $NVIM_CONFIG_HOME
 rm -rf $NVIM_DIR_NAME
 
 echo 'Install zim...'
