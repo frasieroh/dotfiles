@@ -3,6 +3,7 @@ let &packpath = &runtimepath
 source ~/.vimrc
 
 lua << EOF
+
 -- My defaults
 local dirmanConfig = {}
 local journalConfig = nil
@@ -17,6 +18,7 @@ if haveLocalDefs then
 	journalConfig = localDefs.journalConfig
 	gtdConfig = localDefs.gtdConfig
 end
+
 -- Neorg configuration
 require('neorg').setup {
 	load = {
@@ -28,12 +30,16 @@ require('neorg').setup {
 		["core.export"] = {},
 	}
 }
+
+-- Treesitter configuration
 require('nvim-treesitter.configs').setup {
 	ensure_installed = { "norg" },
 	highlight = {
 		enable = true,
 	}
 }
+
+-- Lualine configuration
 require('lualine').setup {
 	options = {
 		theme = {
@@ -71,29 +77,24 @@ require('lualine').setup {
 		lualine_z = {'buffers'},
 	},
 }
+-- Nvim-tree configuration
 require('nvim-tree').setup {}
+
+-- LSP configuration
+local lspconfig = require('lspconfig')
+if lspconfig.artaclsp ~= nil then
+	-- This server is not always installed.
+	lspconfig.artaclsp.setup{}
+end
+lspconfig.clangd.setup {
+	cmd = { 'clangd', '-j=8' },
+}
+lspconfig.gopls.setup {}
+
+-- Linter configuration
+require('lint').linters_by_ft = {
+  python = {'pylint',},
+  sh = {'shellcheck',},
+}
+
 EOF
-let g:nvim_tree_symlink_arrow = " -> "
-let g:nvim_tree_icons = {
-    \ 'default': "",
-    \ 'symlink': "",
-    \ 'git': {
-    \   'unstaged': "*",
-    \   'staged': "*",
-    \   'unmerged': "",
-    \   'renamed': "",
-    \   'untracked': "!",
-    \   'deleted': "!",
-    \   'ignored': ".",
-    \   },
-    \ 'folder': {
-    \   'arrow_open': ">",
-    \   'arrow_closed': "<",
-    \   'default': "",
-    \   'open': "",
-    \   'empty': "",
-    \   'empty_open': ".",
-    \   'symlink': "",
-    \   'symlink_open': "",
-    \   }
-    \ }
