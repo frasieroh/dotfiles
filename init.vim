@@ -82,10 +82,10 @@ require('nvim-tree').setup {}
 
 -- LSP configuration
 local lspconfig = require('lspconfig')
-if lspconfig.artaclsp ~= nil then
-	-- This server is not always installed.
-	lspconfig.artaclsp.setup{}
-end
+-- if lspconfig.artaclsp ~= nil then
+-- 	-- This server is not always installed.
+-- 	lspconfig.artaclsp.setup{}
+-- end
 lspconfig.clangd.setup {
 	cmd = { 'clangd', '-j=8' },
 }
