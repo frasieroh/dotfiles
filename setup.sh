@@ -37,8 +37,8 @@ else
 	mkdir -p $HOME/.config/nvim
 	NVIM_CONFIG_HOME=$HOME/.config/nvim
 fi
-rm -f $NVIM_CONFIG_HOME/init.vim
-ln -s $PWD/init.vim $NVIM_CONFIG_HOME/init.vim
+rm -f $NVIM_CONFIG_HOME/init.lua
+ln -s $PWD/init.lua $NVIM_CONFIG_HOME/init.lua
 
 echo 'Install neovim...'
 NVIM_V='v0.7.0'
@@ -58,10 +58,5 @@ if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
 fi
 zsh $ZIM_HOME/zimfw.zsh init
 zsh $ZIM_HOME/zimfw.zsh install
-
-echo 'Install vim-plug and plugins...'
-curl -sfLo ~/.vim/autoload/plug.vim --create-dirs \
-	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-$LOCAL/bin/nvim -c 'PlugInstall | qa'
 zsh $ZIM_HOME/zimfw.zsh list
-echo 'All done!'
+echo 'All done! Start nvim to install packer plugins.'
