@@ -1,5 +1,5 @@
-zmodule zimfw/git-info
 zmodule frasieroh/theme
+zmodule zimfw/git-info
 zmodule zsh-users/zsh-autosuggestions
 zmodule zsh-users/zsh-completions
 zmodule jeffreytse/zsh-vi-mode
