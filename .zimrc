@@ -1,5 +1,5 @@
 zmodule frasieroh/theme
+zmodule jeffreytse/zsh-vi-mode
 zmodule zsh-users/zsh-autosuggestions
 zmodule zsh-users/zsh-completions
-zmodule jeffreytse/zsh-vi-mode
 zmodule zimfw/completion
