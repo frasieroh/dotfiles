@@ -114,13 +114,13 @@ use { 'tpope/vim-fugitive',
 	event = { 'BufRead', 'BufNewFile' },
 }
 
-use {
-	"folke/trouble.nvim",
+use { 'folke/trouble.nvim',
 	event = { 'BufRead', 'BufNewFile' },
 	config = function()
 		require("trouble").setup {
 			fold_open = "-",
 			fold_closed = "+",
+			icons = false,
 		}
 	end,
 }
