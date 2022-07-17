@@ -160,28 +160,30 @@ use { 'nvim-treesitter/nvim-treesitter',
 use { 'nvim-neorg/neorg',
 	requires = { 'nvim-lua/plenary.nvim' },
 	after = { 'nvim-treesitter' },
-	ft = 'norg',
 	config = function()
-		-- Include an accessory lua file for system-local definitions
-		local dirmanConfig = {}
-		local journalConfig = nil
-		local gtdConfig = nil
-		local homeDir = os.getenv("HOME")
-		package.path = package.path .. ";" .. homeDir .. "/.?.lua"
-		local haveLocalDefs, localDefs = pcall(require, "nvim-local-defs")
-		if haveLocalDefs then
-			-- Override defaults
-			dirmanConfig = localDefs.dirmanConfig
-			journalConfig = localDefs.journalConfig
-			gtdConfig = localDefs.gtdConfig
-		end
 		require('neorg').setup {
 			load = {
 				["core.defaults"] = {},
 				["core.norg.qol.toc"] = {},
-				["core.norg.dirman"] = dirmanConfig,
-				["core.norg.journal"] = journalConfig,
-				["core.gtd.base"] = gtdConfig,
+				["core.norg.dirman"] = {
+					config = {
+						workspaces = {
+							home = "~/neorg",
+						}
+					},
+					autochdir = true,
+					index = "index.norg",
+				},
+				["core.norg.journal"] = {
+					config = {
+						workspace = "home",
+					}
+				},
+				["core.gtd.base"] = {
+					config = {
+						workspace = "home",
+					}
+				},
 				["core.export"] = {},
 			}
 		}
