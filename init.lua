@@ -59,6 +59,8 @@ use { 'kyazdani42/nvim-tree.lua',
 use { 'nvim-telescope/telescope.nvim',
 	requires = { 'nvim-lua/plenary.nvim' },
 	config = function()
+		vim.api.nvim_set_keymap("n", "[", ":Telescope lsp_definitions<CR>", { noremap = true })
+		vim.api.nvim_set_keymap("n", "]", ":Telescope lsp_references<CR>", { noremap = true })
 		vim.api.nvim_set_keymap("n", "ff", ":Telescope find_files<CR>", { noremap = true })
 		vim.api.nvim_set_keymap("n", "fg", ":Telescope live_grep<CR>", { noremap = true })
 	end,
@@ -114,20 +116,9 @@ use { 'tpope/vim-fugitive',
 	event = { 'BufRead', 'BufNewFile' },
 }
 
-use { 'folke/trouble.nvim',
-	event = { 'BufRead', 'BufNewFile' },
-	config = function()
-		require("trouble").setup {
-			fold_open = "-",
-			fold_closed = "+",
-			icons = false,
-		}
-	end,
-}
-
 use { 'neovim/nvim-lspconfig',
+	-- Lazy loading breaks filetype recognition
 	event = { 'BufRead', 'BufNewFile' },
-	-- Load after trouble to get its lsp handlers
 	after = { 'trouble.nvim' },
 	config = function()
 		local lspconfig = require('lspconfig')
@@ -135,15 +126,13 @@ use { 'neovim/nvim-lspconfig',
 			cmd = { 'clangd', '-j=8' },
 		}
 		lspconfig.gopls.setup {}
-		vim.api.nvim_set_keymap("n", "[", ":Trouble lsp_definitions<CR>", { noremap = true })
-		vim.api.nvim_set_keymap("n", "]", ":Trouble lsp_references<CR>", { noremap = true })
 		vim.api.nvim_set_keymap("n", "=", ":lua vim.lsp.buf.hover()<CR>", { noremap = true })
 	end
 }
 
 use { 'jose-elias-alvarez/null-ls.nvim',
 	requires = { 'nvim-lua/plenary.nvim' },
-	event = { 'BufRead', 'BufNewFile' },
+	-- Lazy loading breaks filetype recognition
 	config = function()
 		local null_ls = require('null-ls')
 		null_ls.setup {
