@@ -118,8 +118,6 @@ use { 'tpope/vim-fugitive',
 
 use { 'neovim/nvim-lspconfig',
 	-- Lazy loading breaks filetype recognition
-	event = { 'BufRead', 'BufNewFile' },
-	after = { 'trouble.nvim' },
 	config = function()
 		local lspconfig = require('lspconfig')
 		lspconfig.clangd.setup {
@@ -131,8 +129,8 @@ use { 'neovim/nvim-lspconfig',
 }
 
 use { 'jose-elias-alvarez/null-ls.nvim',
-	requires = { 'nvim-lua/plenary.nvim' },
 	-- Lazy loading breaks filetype recognition
+	requires = { 'nvim-lua/plenary.nvim' },
 	config = function()
 		local null_ls = require('null-ls')
 		null_ls.setup {
@@ -146,7 +144,6 @@ use { 'jose-elias-alvarez/null-ls.nvim',
 }
 
 use { 'nvim-treesitter/nvim-treesitter',
-	event = { 'BufRead', 'BufNewFile' },
 	config = function()
 		require('nvim-treesitter.configs').setup {
 			ensure_installed = { "norg" },
