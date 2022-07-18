@@ -59,8 +59,33 @@ use { 'kyazdani42/nvim-tree.lua',
 use { 'nvim-telescope/telescope.nvim',
 	requires = { 'nvim-lua/plenary.nvim' },
 	config = function()
+		require('telescope').setup {
+			pickers = {
+				find_files = {
+					theme = "ivy",
+					initial_mode = "insert",
+				},
+				live_grep = {
+					theme = "ivy",
+					initial_mode = "insert",
+				},
+				lsp_definitions = {
+					theme = "ivy",
+					initial_mode = "normal",
+				},
+				lsp_references = {
+					theme = "ivy",
+					initial_mode = "normal",
+				},
+				diagnostics = {
+					theme = "ivy",
+					initial_mode = "normal",
+				},
+			},
+		}
 		vim.api.nvim_set_keymap("n", "[", ":Telescope lsp_definitions<CR>", { noremap = true })
 		vim.api.nvim_set_keymap("n", "]", ":Telescope lsp_references<CR>", { noremap = true })
+		vim.api.nvim_set_keymap("n", "'", ":Telescope diagnostics<CR>", { noremap = true })
 		vim.api.nvim_set_keymap("n", "ff", ":Telescope find_files<CR>", { noremap = true })
 		vim.api.nvim_set_keymap("n", "fg", ":Telescope live_grep<CR>", { noremap = true })
 	end,
@@ -208,4 +233,7 @@ vim.api.nvim_set_keymap("n", "<S-h>", ":bp<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<S-l>", ":bn<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "˙", ":tabprevious<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "¬", ":tabnext<CR>", { noremap = true })
+
+-- Autocommands
+vim.api.nvim_create_autocmd({"BufWrite"}, {pattern="*", callback=vim.lsp.buf.formatting})
 
