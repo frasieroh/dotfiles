@@ -1,8 +1,5 @@
 bindkey -v
 
-# Source another optional script for system-dependent stuff
-[[ ! -f ~/.zshrc2 ]] || source ~/.zshrc2
-
 # Load zim modules
 export ZIM_HOME=$HOME/.zim
 # Performance tweaks for zsh-users/zsh-autosuggestions
@@ -17,6 +14,3 @@ alias ls="ls --color=always"
 alias ll="ls -la --color=always"
 export EDITOR=nvim
 export VISUAL=nvim
-
-# Source another optional script for system-dependent stuff
-[[ ! -f ~/.zshrc3 ]] || source ~/.zshrc3
