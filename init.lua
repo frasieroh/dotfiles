@@ -85,7 +85,7 @@ use { 'nvim-telescope/telescope.nvim',
 		}
 		vim.api.nvim_set_keymap("n", "[", ":Telescope lsp_definitions<CR>", { noremap = true })
 		vim.api.nvim_set_keymap("n", "]", ":Telescope lsp_references<CR>", { noremap = true })
-		vim.api.nvim_set_keymap("n", "'", ":Telescope diagnostics<CR>", { noremap = true })
+		vim.api.nvim_set_keymap("n", "'", ":Telescope diagnostics bufnr=0<CR>", { noremap = true })
 		vim.api.nvim_set_keymap("n", "ff", ":Telescope find_files<CR>", { noremap = true })
 		vim.api.nvim_set_keymap("n", "fg", ":Telescope live_grep<CR>", { noremap = true })
 	end,
