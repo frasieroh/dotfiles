@@ -7,9 +7,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 -- Plugins
-local packer = require('packer')
-packer.startup(function(use)
-
+local packer = require('packer') packer.startup(function(use)
 use { 'wbthomason/packer.nvim', }
 
 use { 'NLKNguyen/papercolor-theme',
@@ -24,22 +22,20 @@ use { 'christoomey/vim-tmux-navigator', }
 use { 'nvim-telescope/telescope.nvim',
 	requires = { 'nvim-lua/plenary.nvim' },
 	config = function()
-		local normalpicker = {
-			theme = "ivy",
-			initial_mode = "normal",
-		}
-		local insert_picker = {
-			theme = "ivy",
-			initial_mode = "insert",
-		}
+		local builtin_config = function(initial_mode)
+			return {
+				theme = "ivy",
+				initial_mode = inital_mode,
+			}
+		end
 		require('telescope').setup {
 			pickers = {
-				live_grep = insert_picker,
-				file_browser = normal_picker,
-				lsp_definitions = normal_picker,
-				lsp_type_definitions = normal_picker,
-				lsp_references = normal_picker,
-				diagnostics = normal_picker,
+				live_grep = builtin_config("insert"),
+				file_browser = builtin_config("normal"),
+				lsp_definitions = builtin_config("normal"),
+				lsp_type_definitions = builtin_config("normal"),
+				lsp_references = builtin_config("normal"),
+				diagnostics = builtin_config("normal"),
 			},
 			extensions = {
 				file_browser = {
@@ -48,15 +44,15 @@ use { 'nvim-telescope/telescope.nvim',
 					hijack_netrw = true,
 					dir_icon = "+",
 					dir_icon_hl = "Directory",
+					-- Make ` work as a toggle.
 					attach_mappings = function(prompt_bufnr, map)
-						-- Make ` work as a toggle
 						local actions = require('telescope.actions')
 						local close_file_browser = function()
 							actions.close(prompt_bufnr)
 						end
 						map("n", "`", close_file_browser)
+						return true
 					end,
-
 				}
 			}
 		}
