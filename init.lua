@@ -21,73 +21,59 @@ use { 'NLKNguyen/papercolor-theme',
 
 use { 'christoomey/vim-tmux-navigator', }
 
-use { 'kyazdani42/nvim-tree.lua',
-	config = function()
-		require('nvim-tree').setup {
-			renderer = { icons = {
-				symlink_arrow = " > ",
-				padding = "",
-				glyphs = {
-					default = "· ",
-					symlink = "l ",
-					git = {
-						unstaged = "* ",
-						staged = "+ ",
-						unmerged = "? ",
-						renamed = "r ",
-						deleted = "d ",
-						untracked = "x ",
-						ignored = "x ",
-					},
-					folder = {
-						arrow_open = "-",
-						arrow_closed = "+",
-						default = "",
-						open = "",
-						empty = "",
-						empty_open = "",
-						symlink = "",
-						symlink_open = "",
-					},
-				},
-			}},
-		}
-		vim.api.nvim_set_keymap("n", "`", ":NvimTreeToggle<CR>", { noremap = true })
-	end
-}
-
 use { 'nvim-telescope/telescope.nvim',
 	requires = { 'nvim-lua/plenary.nvim' },
 	config = function()
+		local normalpicker = {
+			theme = "ivy",
+			initial_mode = "normal",
+		}
+		local insert_picker = {
+			theme = "ivy",
+			initial_mode = "insert",
+		}
 		require('telescope').setup {
 			pickers = {
-				find_files = {
-					theme = "ivy",
-					initial_mode = "insert",
-				},
-				live_grep = {
-					theme = "ivy",
-					initial_mode = "insert",
-				},
-				lsp_definitions = {
-					theme = "ivy",
-					initial_mode = "normal",
-				},
-				lsp_references = {
-					theme = "ivy",
-					initial_mode = "normal",
-				},
-				diagnostics = {
-					theme = "ivy",
-					initial_mode = "normal",
-				},
+				live_grep = insert_picker,
+				file_browser = normal_picker,
+				lsp_definitions = normal_picker,
+				lsp_type_definitions = normal_picker,
+				lsp_references = normal_picker,
+				diagnostics = normal_picker,
 			},
+			extensions = {
+				file_browser = {
+					theme = "ivy",
+					initial_mode = "normal",
+					hijack_netrw = true,
+					dir_icon = "+",
+					dir_icon_hl = "Directory",
+					attach_mappings = function(prompt_bufnr, map)
+						-- Make ` work as a toggle
+						local actions = require('telescope.actions')
+						local close_file_browser = function()
+							actions.close(prompt_bufnr)
+						end
+						map("n", "`", close_file_browser)
+					end,
+
+				}
+			}
 		}
 		vim.api.nvim_set_keymap("n", "[", ":Telescope lsp_definitions<CR>", { noremap = true })
+		vim.api.nvim_set_keymap("n", "<C-[>", ":Telescope lsp_type_definitions<CR>", { noremap = true })
 		vim.api.nvim_set_keymap("n", "]", ":Telescope lsp_references<CR>", { noremap = true })
 		vim.api.nvim_set_keymap("n", "'", ":Telescope diagnostics bufnr=0<CR>", { noremap = true })
-		vim.api.nvim_set_keymap("n", "ff", ":Telescope find_files<CR>", { noremap = true })
 		vim.api.nvim_set_keymap("n", "fg", ":Telescope live_grep<CR>", { noremap = true })
+		vim.api.nvim_set_keymap("n", "`", ":Telescope file_browser<CR>", { noremap = true })
+	end,
+}
+
+use { 'nvim-telescope/telescope-file-browser.nvim',
+	requires = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' },
+	after = { 'telescope.nvim' },
+	config = function()
+		require('telescope').load_extension("file_browser")
 	end,
 }
 
@@ -133,14 +119,6 @@ use { 'nvim-lualine/lualine.nvim',
 	end
 }
 
-use { 'lukas-reineke/indent-blankline.nvim',
-	event = { 'BufRead', 'BufNewFile' },
-}
-
-use { 'tpope/vim-fugitive',
-	event = { 'BufRead', 'BufNewFile' },
-}
-
 use { 'neovim/nvim-lspconfig',
 	-- Lazy loading breaks filetype recognition
 	config = function()
@@ -182,7 +160,7 @@ use { 'nvim-treesitter/nvim-treesitter',
 }
 
 use { 'nvim-neorg/neorg',
-	requires = { 'nvim-lua/plenary.nvim' },
+	requires = { 'nvim-lua/plenary.nvim', 'nvim-treesitter/nvim-treesitter' },
 	after = { 'nvim-treesitter' },
 	config = function()
 		require('neorg').setup {
@@ -212,6 +190,14 @@ use { 'nvim-neorg/neorg',
 			}
 		}
 	end,
+}
+
+use { 'tpope/vim-fugitive',
+	event = { 'BufRead', 'BufNewFile' },
+}
+
+use { 'lukas-reineke/indent-blankline.nvim',
+	event = { 'BufRead', 'BufNewFile' },
 }
 
 if packer_bootstrap then
