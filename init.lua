@@ -41,41 +41,79 @@ use { 'nvim-telescope/telescope.nvim',
 				lsp_references = builtin_config("normal"),
 				diagnostics = builtin_config("normal"),
 			},
-			extensions = {
-				file_browser = {
-					theme = "ivy",
-					initial_mode = "normal",
-					hijack_netrw = true,
-					dir_icon = "+",
-					dir_icon_hl = "Directory",
-					-- Make ` work as a toggle.
-					attach_mappings = function(prompt_bufnr, map)
-						local actions = require('telescope.actions')
-						local close_file_browser = function()
-							actions.close(prompt_bufnr)
-						end
-						map("n", "`", close_file_browser)
-						return true
-					end,
-				}
-			}
+			-- extensions = {
+			-- 	file_browser = {
+			-- 		theme = "ivy",
+			-- 		initial_mode = "normal",
+			-- 		hijack_netrw = true,
+			-- 		dir_icon = "+",
+			-- 		dir_icon_hl = "Directory",
+			-- 		-- Make ` work as a toggle.
+			-- 		attach_mappings = function(prompt_bufnr, map)
+			-- 			local actions = require('telescope.actions')
+			-- 			local close_file_browser = function()
+			-- 				actions.close(prompt_bufnr)
+			-- 			end
+			-- 			map("n", "`", close_file_browser)
+			-- 			return true
+			-- 		end,
+			-- 	}
+			-- }
 		}
 		vim.api.nvim_set_keymap("n", "[", ":Telescope lsp_definitions<CR>", { noremap = true })
 		vim.api.nvim_set_keymap("n", "<C-[>", ":Telescope lsp_type_definitions<CR>", { noremap = true })
 		vim.api.nvim_set_keymap("n", "]", ":Telescope lsp_references<CR>", { noremap = true })
 		vim.api.nvim_set_keymap("n", "'", ":Telescope diagnostics bufnr=0<CR>", { noremap = true })
 		vim.api.nvim_set_keymap("n", "fg", ":Telescope live_grep<CR>", { noremap = true })
-		vim.api.nvim_set_keymap("n", "`", ":Telescope file_browser<CR>", { noremap = true })
+		-- vim.api.nvim_set_keymap("n", "`", ":Telescope file_browser<CR>", { noremap = true })
 	end,
 }
 
-use { 'nvim-telescope/telescope-file-browser.nvim',
+-- I really like this plugin, but it's too buggy right now.
+-- use { 'nvim-telescope/telescope-file-browser.nvim',
+-- 	tag = '*',
+-- 	requires = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' },
+-- 	after = { 'telescope.nvim' },
+-- 	config = function()
+-- 		require('telescope').load_extension("file_browser")
+-- 	end,
+-- }
+
+-- Probably replace this with telescope-file-browser when it's more mature
+use { 'kyazdani42/nvim-tree.lua',
 	tag = '*',
-	requires = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' },
-	after = { 'telescope.nvim' },
 	config = function()
-		require('telescope').load_extension("file_browser")
-	end,
+		require('nvim-tree').setup {
+			renderer = { icons = {
+				symlink_arrow = " > ",
+				padding = "",
+				glyphs = {
+					default = "· ",
+					symlink = "l ",
+					git = {
+						unstaged = "* ",
+						staged = "+ ",
+						unmerged = "? ",
+						renamed = "r ",
+						deleted = "d ",
+						untracked = "x ",
+						ignored = "x ",
+					},
+					folder = {
+						arrow_open = "-",
+						arrow_closed = "+",
+						default = "",
+						open = "",
+						empty = "",
+						empty_open = "",
+						symlink = "",
+						symlink_open = "",
+					},
+				},
+			}},
+		}
+		vim.api.nvim_set_keymap("n", "`", ":NvimTreeToggle<CR>", { noremap = true })
+	end
 }
 
 use { 'nvim-lualine/lualine.nvim',
