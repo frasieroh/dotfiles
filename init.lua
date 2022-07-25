@@ -9,8 +9,10 @@ end
 -- Plugins
 local packer = require('packer') packer.startup(function(use)
 use { 'wbthomason/packer.nvim', }
+	tag = '*',
 
 use { 'NLKNguyen/papercolor-theme',
+	tag = '*',
 	config = function()
 		vim.opt.background = "dark"
 		vim.cmd("colorscheme PaperColor")
@@ -18,8 +20,10 @@ use { 'NLKNguyen/papercolor-theme',
 }
 
 use { 'christoomey/vim-tmux-navigator', }
+	tag = '*',
 
 use { 'nvim-telescope/telescope.nvim',
+	tag = '*',
 	requires = { 'nvim-lua/plenary.nvim' },
 	config = function()
 		local builtin_config = function(initial_mode)
@@ -66,6 +70,7 @@ use { 'nvim-telescope/telescope.nvim',
 }
 
 use { 'nvim-telescope/telescope-file-browser.nvim',
+	tag = '*',
 	requires = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' },
 	after = { 'telescope.nvim' },
 	config = function()
@@ -74,6 +79,7 @@ use { 'nvim-telescope/telescope-file-browser.nvim',
 }
 
 use { 'nvim-lualine/lualine.nvim',
+	tag = '*',
 	config = function()
 		require('lualine').setup {
 			options = {
@@ -116,6 +122,7 @@ use { 'nvim-lualine/lualine.nvim',
 }
 
 use { 'neovim/nvim-lspconfig',
+	tag = '*',
 	-- Lazy loading breaks filetype recognition
 	config = function()
 		local lspconfig = require('lspconfig')
@@ -128,6 +135,7 @@ use { 'neovim/nvim-lspconfig',
 }
 
 use { 'jose-elias-alvarez/null-ls.nvim',
+	tag = '*',
 	-- Lazy loading breaks filetype recognition
 	requires = { 'nvim-lua/plenary.nvim' },
 	config = function()
@@ -143,6 +151,7 @@ use { 'jose-elias-alvarez/null-ls.nvim',
 }
 
 use { 'nvim-treesitter/nvim-treesitter',
+	tag = '*',
 	config = function()
 		require('nvim-treesitter.configs').setup {
 			ensure_installed = {
@@ -156,6 +165,7 @@ use { 'nvim-treesitter/nvim-treesitter',
 }
 
 use { 'nvim-neorg/neorg',
+	tag = '*',
 	requires = { 'nvim-lua/plenary.nvim', 'nvim-treesitter/nvim-treesitter' },
 	after = { 'nvim-treesitter' },
 	config = function()
@@ -189,10 +199,12 @@ use { 'nvim-neorg/neorg',
 }
 
 use { 'tpope/vim-fugitive',
+	tag = '*',
 	event = { 'BufRead', 'BufNewFile' },
 }
 
 use { 'lukas-reineke/indent-blankline.nvim',
+	tag = '*',
 	event = { 'BufRead', 'BufNewFile' },
 }
 
