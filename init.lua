@@ -25,7 +25,7 @@ use { 'nvim-telescope/telescope.nvim',
 		local builtin_config = function(initial_mode)
 			return {
 				theme = "ivy",
-				initial_mode = inital_mode,
+				initial_mode = initial_mode,
 			}
 		end
 		require('telescope').setup {
