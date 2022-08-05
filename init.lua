@@ -8,8 +8,9 @@ end
 
 -- Plugins
 local packer = require('packer') packer.startup(function(use)
-use { 'wbthomason/packer.nvim', }
+use { 'wbthomason/packer.nvim',
 	tag = '*',
+}
 
 use { 'NLKNguyen/papercolor-theme',
 	tag = '*',
@@ -19,8 +20,9 @@ use { 'NLKNguyen/papercolor-theme',
 	end,
 }
 
-use { 'christoomey/vim-tmux-navigator', }
+use { 'christoomey/vim-tmux-navigator',
 	tag = '*',
+}
 
 use { 'nvim-telescope/telescope.nvim',
 	tag = '*',
