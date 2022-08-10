@@ -232,7 +232,6 @@ use { 'nvim-neorg/neorg',
 						workspace = "home",
 					}
 				},
-				["core.export"] = {},
 			}
 		}
 	end,
