@@ -205,7 +205,7 @@ use { 'nvim-treesitter/nvim-treesitter',
 }
 
 use { 'nvim-neorg/neorg',
-	tag = '*',
+	tag = '0.0.12',
 	requires = { 'nvim-lua/plenary.nvim', 'nvim-treesitter/nvim-treesitter' },
 	after = { 'nvim-treesitter' },
 	config = function()
