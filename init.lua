@@ -288,6 +288,20 @@ local plugins = {
 		lazy = true,
 		event = { 'BufRead', 'BufNewFile' },
 	},
+	{
+		"lsp_lines",
+		url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+		commit = "ec98b45c8280e5ef8c84028d4f38aa447276c002",
+		config = function()
+			require("lsp_lines").setup()
+			vim.diagnostic.config {
+				virtual_text = false,
+				virtual_lines = {
+					only_current_line = true,
+				},
+			}
+		end,
+	},
 
 }
 

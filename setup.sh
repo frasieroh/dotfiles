@@ -1,6 +1,9 @@
 #!/bin/bash
-
-OS=''
+if [[ -z "$(which zsh)" ]]
+then
+	echo 'Install zsh'
+	exit 1
+fi
 if [[ $OSTYPE == linux* ]]
 then
 	NVIM_DL_NAME='nvim-linux64'
@@ -13,50 +16,51 @@ then
 fi
 if [[ $NVIM_DL_NAME == "" ]]
 then
-	echo 'Fuck!'
+	echo "Unrecognized OS type $OSTYPE"
 	exit 1
 fi
 
-echo 'Link dotfiles...'
-rm -f $HOME/.tmux.conf
-rm -f $HOME/.zshrc
-rm -f $HOME/.zshenv
-rm -f $HOME/.zprofile
-rm -f $HOME/.zimrc
-rm -f $HOME/.vimrc
-ln -s $PWD/.tmux.conf $HOME/.tmux.conf
-ln -s $PWD/.zshrc $HOME/.zshrc
-ln -s $PWD/.zshenv $HOME/.zshenv
-ln -s $PWD/.zprofile $HOME/.zprofile
-ln -s $PWD/.zimrc $HOME/.zimrc
-ln -s $PWD/.vimrc $HOME/.vimrc
+echo 'Linking dotfiles...'
+update_link() {
+	# Backup old dotfiles at <dotfiles>.old and create new symlink
+	cp -rL "$1" "$1.old" 2>/dev/null
+	rm -f "$1"
+	ln -s "$2" "$1"
+}
+update_link "$HOME/.tmux.conf" "$PWD/.tmux.conf"
+update_link "$HOME/.zshrc" "$PWD/.zshrc"
+update_link "$HOME/.zshenv" "$PWD/.zshenv"
+update_link "$HOME/.zprofile" "$PWD/.zprofile"
+update_link "$HOME/.zimrc" "$PWD/.zimrc"
+update_link "$HOME/.vimrc" "$PWD/.vimrc"
 if [[ $XDG_CONFIG_HOME ]];
 then
 	NVIM_CONFIG_HOME=$XDG_CONFIG_HOME/nvim
 else
-	mkdir -p $HOME/.config/nvim
+	mkdir -p "$HOME/.config/nvim"
 	NVIM_CONFIG_HOME=$HOME/.config/nvim
 fi
-rm -f $NVIM_CONFIG_HOME/init.lua
-ln -s $PWD/init.lua $NVIM_CONFIG_HOME/init.lua
+update_link "$NVIM_CONFIG_HOME/init.lua" "$PWD/init.lua"
 
 echo 'Install neovim...'
-NVIM_V='v0.7.0'
+NVIM_V='v0.8.1'
 LOCAL="$HOME/.local"
-curl -L https://github.com/neovim/neovim/releases/download/$NVIM_V/$NVIM_DL_NAME.tar.gz | tar zxf -
-mkdir -p $LOCAL/bin
-mkdir -p $LOCAL/share/nvim
-mv -f $NVIM_DIR_NAME/bin/nvim $LOCAL/bin/nvim
-cp -R $NVIM_DIR_NAME/share/nvim/* $LOCAL/share/nvim/
-rm -rf $NVIM_DIR_NAME
+curl -L "https://github.com/neovim/neovim/releases/download/$NVIM_V/$NVIM_DL_NAME.tar.gz" | tar zxf -
+mkdir -p "$LOCAL/bin"
+mkdir -p "$LOCAL/share/nvim"
+mv -f "$NVIM_DIR_NAME/bin/nvim" "$LOCAL/bin/nvim"
+cp -R "$NVIM_DIR_NAME/share/nvim/*" "$LOCAL/share/nvim/"
+rm -rf "$NVIM_DIR_NAME"
 
 echo 'Install zim...'
 export ZIM_HOME=$HOME/.zim
 if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
-  curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
+  curl -fsSL --create-dirs -o "${ZIM_HOME}/zimfw.zsh" \
       https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
 fi
-zsh $ZIM_HOME/zimfw.zsh init
-zsh $ZIM_HOME/zimfw.zsh install
-zsh $ZIM_HOME/zimfw.zsh list
-echo 'All done! Start nvim to install packer plugins.'
+zsh "$ZIM_HOME/zimfw.zsh" init
+zsh "$ZIM_HOME/zimfw.zsh" install
+zsh "$ZIM_HOME/zimfw.zsh" list
+
+echo 'All done!'
+
