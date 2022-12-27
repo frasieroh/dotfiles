@@ -150,8 +150,8 @@ local plugins = {
 			{ "[", ":Telescope lsp_definitions<CR>", mode = "n" },
 			{ "<C-[>", ":Telescope lsp_type_definitions<CR>", mode = "n" },
 			{ "]", ":Telescope lsp_references<CR>", mode = "n" },
-			{ "''", ":Telescope diagnostics bufnr=0<CR>", mode = "n" },
-			{ "'''", ":Telescope diagnostics<CR>", mode = "n" },
+			{ "'", ":Telescope diagnostics bufnr=0<CR>", mode = "n" },
+			{ "''", ":Telescope diagnostics<CR>", mode = "n" },
 			{ "fg", ":Telescope live_grep<CR>", mode = "n" },
 		},
 		config = function()
@@ -250,7 +250,7 @@ local plugins = {
 		commit = "ec98b45c8280e5ef8c84028d4f38aa447276c002",
 		lazy = true,
 		keys = {
-			{ "'", ":lua require('lsp_lines').toggle()<CR>", mode = "n" },
+			{ ";", ":lua require('lsp_lines').toggle()<CR>", mode = "n" },
 		},
 		event = { 'BufRead', 'BufNewFile' },
 		config = function()
