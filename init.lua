@@ -77,8 +77,8 @@ local plugins = {
 	-- Neorg and related plugins
 	{
 		"nvim-neorg/neorg",
-		-- neorg already lazy loads itself
-		--  lazy = true,
+		lazy = true,
+		ft = { "norg" },
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		config = function()
 			require('neorg').setup {
@@ -99,12 +99,6 @@ local plugins = {
 							workspace = "home",
 						}
 					},
-					-- GTD is being rewritten.
-					-- ["core.gtd.base"] = {
-					-- 	config = {
-					-- 		workspace = "home",
-					-- 	}
-					-- },
 				}
 			}
 		end,
@@ -112,8 +106,6 @@ local plugins = {
 
 	{
 		"nvim-treesitter/nvim-treesitter",
-		lazy = true,
-		event = { 'BufRead', 'BufNewFile' },
 		config = function()
 			require('nvim-treesitter.configs').setup {
 				ensure_installed = {
@@ -158,7 +150,8 @@ local plugins = {
 			{ "[", ":Telescope lsp_definitions<CR>", mode = "n" },
 			{ "<C-[>", ":Telescope lsp_type_definitions<CR>", mode = "n" },
 			{ "]", ":Telescope lsp_references<CR>", mode = "n" },
-			{ "'", ":Telescope diagnostics bufnr=0<CR>", mode = "n" },
+			{ "''", ":Telescope diagnostics bufnr=0<CR>", mode = "n" },
+			{ "'''", ":Telescope diagnostics<CR>", mode = "n" },
 			{ "fg", ":Telescope live_grep<CR>", mode = "n" },
 		},
 		config = function()
@@ -221,20 +214,20 @@ local plugins = {
 				options = {
 					theme = 'tokyonight',
 					icons_enabled = false,
-					section_separators = {left = '', right = ''},
-					component_separators = {left = '', right = ''},
+					section_separators = { left = '', right = '' },
+					component_separators = { left = '', right = '' },
 				},
 				sections = {
-					lualine_a = {'branch'},
-					lualine_b = {'filename'},
-					lualine_c = {''},
-					lualine_x = {''},
-					lualine_y = {'filetype', 'progress', 'location'},
-					lualine_z = {''}
+					lualine_a = { 'branch' },
+					lualine_b = { 'filename' },
+					lualine_c = { '' },
+					lualine_x = { '' },
+					lualine_y = { 'filetype', 'progress', 'location' },
+					lualine_z = { '' }
 				},
 				tabline = {
-					lualine_a = {'tabs'},
-					lualine_z = {'buffers'},
+					lualine_a = { 'tabs' },
+					lualine_z = { 'buffers' },
 				},
 			}
 		end,
@@ -255,13 +248,16 @@ local plugins = {
 		"lsp_lines",
 		url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
 		commit = "ec98b45c8280e5ef8c84028d4f38aa447276c002",
+		lazy = true,
+		keys = {
+			{ "'", ":lua require('lsp_lines').toggle()<CR>", mode = "n" },
+		},
+		event = { 'BufRead', 'BufNewFile' },
 		config = function()
 			require("lsp_lines").setup()
 			vim.diagnostic.config {
 				virtual_text = false,
-				virtual_lines = {
-					only_current_line = true,
-				},
+				virtual_lines = true,
 			}
 		end,
 	},
@@ -292,7 +288,5 @@ vim.api.nvim_set_keymap("n", "<S-l>", ":bn<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "˙", ":tabprevious<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "¬", ":tabnext<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "=", ":lua vim.lsp.buf.hover()<CR>", { noremap = true })
-
--- Autocommands
--- vim.api.nvim_create_autocmd({"BufWrite"}, {pattern="*", callback=vim.lsp.buf.formatting})
+vim.api.nvim_set_keymap("n", "ff", ":lua vim.lsp.buf.format()<CR>", { noremap = true })
 
