@@ -164,7 +164,6 @@ local plugins = {
 			require('telescope').setup {
 				pickers = {
 					live_grep = builtin_config("insert"),
-					file_browser = builtin_config("normal"),
 					lsp_definitions = builtin_config("normal"),
 					lsp_type_definitions = builtin_config("normal"),
 					lsp_references = builtin_config("normal"),
