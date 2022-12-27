@@ -46,10 +46,14 @@ echo 'Install neovim...'
 NVIM_V='v0.8.1'
 LOCAL="$HOME/.local"
 curl -L "https://github.com/neovim/neovim/releases/download/$NVIM_V/$NVIM_DL_NAME.tar.gz" | tar zxf -
-mkdir -p "$LOCAL/bin"
-mkdir -p "$LOCAL/share/nvim"
-mv -f "$NVIM_DIR_NAME/bin/nvim" "$LOCAL/bin/nvim"
-cp -R "$NVIM_DIR_NAME/share/nvim/*" "$LOCAL/share/nvim/"
+mkdir -p "$LOCAL"
+if [[ $OSTYPE == linux* ]]
+then
+	cp -R "$NVIM_DIR_NAME"/* "$LOCAL"
+else
+	# MacOS cp hates globs
+	cp -R "$NVIM_DIR_NAME/" "$LOCAL"
+fi
 rm -rf "$NVIM_DIR_NAME"
 
 echo 'Install zim...'
