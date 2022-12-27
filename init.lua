@@ -136,10 +136,13 @@ local plugins = {
 	},
 
 	{
-		"NLKNguyen/papercolor-theme",
+		"folke/tokyonight.nvim",
 		config = function()
+			require('tokyonight').setup {
+				style = "night",
+			}
 			vim.opt.background = "dark"
-			vim.cmd("colorscheme PaperColor")
+			vim.cmd("colorscheme tokyonight")
 		end,
 	},
 
@@ -174,63 +177,40 @@ local plugins = {
 					lsp_references = builtin_config("normal"),
 					diagnostics = builtin_config("normal"),
 				},
-				-- extensions = {
-				-- 	file_browser = {
-				-- 		theme = "ivy",
-				-- 		initial_mode = "normal",
-				-- 		hijack_netrw = true,
-				-- 		dir_icon = "+",
-				-- 		dir_icon_hl = "Directory",
-				-- 		-- Make ` work as a toggle.
-				-- 		attach_mappings = function(prompt_bufnr, map)
-				-- 			local actions = require('telescope.actions')
-				-- 			local close_file_browser = function()
-				-- 				actions.close(prompt_bufnr)
-				-- 			end
-				-- 			map("n", "`", close_file_browser)
-				-- 			return true
-				-- 		end,
-				-- 	}
-				-- }
+				extensions = {
+					file_browser = {
+						theme = "ivy",
+						initial_mode = "normal",
+						hijack_netrw = true,
+						dir_icon = "+",
+						dir_icon_hl = "Directory",
+						-- Make ` work as a toggle.
+						attach_mappings = function(prompt_bufnr, map)
+							local actions = require('telescope.actions')
+							local close_file_browser = function()
+								actions.close(prompt_bufnr)
+							end
+							map("n", "`", close_file_browser)
+							return true
+						end,
+					}
+				}
 			}
 		end,
 	},
 
 	{
-		"kyazdani42/nvim-tree.lua",
+		"nvim-telescope/telescope-file-browser.nvim",
+		lazy = true,
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+			"nvim-lua/plenary.nvim",
+		},
 		keys = {
-			{ "`", ":NvimTreeToggle<CR>", mode = "n" },
+			{ "`", ":Telescope file_browser<CR>", mode = "n" },
 		},
 		config = function()
-			require('nvim-tree').setup {
-				renderer = { icons = {
-					symlink_arrow = " > ",
-					padding = "",
-					glyphs = {
-						default = "· ",
-						symlink = "l ",
-						git = {
-							unstaged = "* ",
-							staged = "+ ",
-							unmerged = "? ",
-							renamed = "r ",
-							deleted = "d ",
-							untracked = "x ",
-							ignored = "x ",
-						},
-						folder = {
-							arrow_open = "-",
-							arrow_closed = "+",
-							default = "",
-							open = "",
-							empty = "",
-							empty_open = "",
-							symlink = "",
-							symlink_open = "",
-						},
-					},
-				}},
-			}
+			require("telescope").load_extension("file_browser")
 		end,
 	},
 
@@ -239,24 +219,7 @@ local plugins = {
 		config = function()
 			require('lualine').setup {
 				options = {
-					theme = {
-						normal = {
-							a = { fg = '#C6C6C6', bg = '#3A3A3A' },
-							b = { fg = '#B2B2B2', bg = '#303030' },
-							c = { fg = '#B2B2B2', bg = '#303030' },
-							x = { fg = '#B2B2B2', bg = '#303030' },
-							y = { fg = '#B2B2B2', bg = '#303030' },
-							z = { fg = '#C6C6C6', bg = '#3A3A3A' },
-						},
-						inactive = {
-							a = { fg = '#B2B2B2', bg = '#303030' },
-							b = { fg = '#C6C6C6', bg = '#3A3A3A' },
-							c = { fg = '#C6C6C6', bg = '#3A3A3A' },
-							x = { fg = '#C6C6C6', bg = '#3A3A3A' },
-							y = { fg = '#C6C6C6', bg = '#3A3A3A' },
-							z = { fg = '#B2B2B2', bg = '#303030' },
-						}
-					},
+					theme = 'tokyonight',
 					icons_enabled = false,
 					section_separators = {left = '', right = ''},
 					component_separators = {left = '', right = ''},
