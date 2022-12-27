@@ -12,7 +12,7 @@ fi
 if [[ $OSTYPE == darwin* ]]
 then
 	NVIM_DL_NAME='nvim-macos'
-	NVIM_DIR_NAME='nvim-osx64'
+	NVIM_DIR_NAME='nvim-macos'
 fi
 if [[ $NVIM_DL_NAME == "" ]]
 then
