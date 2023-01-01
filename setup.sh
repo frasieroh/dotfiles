@@ -41,6 +41,7 @@ else
 	NVIM_CONFIG_HOME=$HOME/.config/nvim
 fi
 update_link "$NVIM_CONFIG_HOME/init.lua" "$PWD/init.lua"
+update_link "$NVIM_CONFIG_HOME/lazy-lock.json" "$PWD/lazy-lock.json"
 
 echo 'Install neovim...'
 NVIM_V='v0.8.1'
