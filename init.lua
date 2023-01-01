@@ -24,7 +24,7 @@ local plugins = {
 
 	{
 		"jose-elias-alvarez/null-ls.nvim",
-		-- Don't load until mason-null-ls includes this
+		-- Don't load until mason-null-ls requires this
 		-- It requires itself to be set up first
 		lazy = true,
 	},
@@ -128,14 +128,9 @@ local plugins = {
 	},
 
 	{
-		"folke/tokyonight.nvim",
-		config = function()
-			require('tokyonight').setup {
-				style = "night",
-			}
-			vim.opt.background = "dark"
-			vim.cmd("colorscheme tokyonight")
-		end,
+		"rebelot/kanagawa.nvim",
+		lazy = true,
+		priority = 1000,
 	},
 
 	{
@@ -171,7 +166,7 @@ local plugins = {
 				},
 				extensions = {
 					file_browser = {
-						theme = "ivy",
+						theme = "dropdown",
 						initial_mode = "normal",
 						hijack_netrw = true,
 						dir_icon = "+",
@@ -211,7 +206,7 @@ local plugins = {
 		config = function()
 			require('lualine').setup {
 				options = {
-					theme = 'tokyonight',
+					theme = 'kanagawa',
 					icons_enabled = false,
 					section_separators = { left = '', right = '' },
 					component_separators = { left = '', right = '' },
@@ -270,8 +265,10 @@ require("lazy").setup(plugins, {
 	}
 })
 
+-- Colorscheme
+vim.cmd [[ colorscheme kanagawa ]]
+
 -- Other settings
-vim.cmd("filetype plugin indent on")
 vim.opt.nu = true
 vim.opt.cursorline = true
 vim.opt.tabpagemax = 20
@@ -280,6 +277,7 @@ vim.opt.showcmd = true
 vim.opt.wildmenu = true
 vim.opt.hlsearch = true
 vim.opt.autoindent = true
+vim.opt.termguicolors = true
 
 -- Other keybindings
 vim.api.nvim_set_keymap("n", "<S-h>", ":bp<CR>", { noremap = true })
@@ -288,4 +286,3 @@ vim.api.nvim_set_keymap("n", "˙", ":tabprevious<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "¬", ":tabnext<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "=", ":lua vim.lsp.buf.hover()<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "ff", ":lua vim.lsp.buf.format()<CR>", { noremap = true })
-
