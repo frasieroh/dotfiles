@@ -278,6 +278,7 @@ vim.opt.wildmenu = true
 vim.opt.hlsearch = true
 vim.opt.autoindent = true
 vim.opt.termguicolors = true
+vim.opt.laststatus = 3
 
 -- Other keybindings
 vim.api.nvim_set_keymap("n", "<S-h>", ":bp<CR>", { noremap = true })
