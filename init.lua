@@ -74,63 +74,13 @@ local plugins = {
 			mason_null_ls.setup_handlers {}
 		end,
 	},
-	-- Neorg and related plugins
-	{
-		"nvim-neorg/neorg",
-		lazy = true,
-		ft = { "norg" },
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		config = function()
-			require('neorg').setup {
-				load = {
-					["core.defaults"] = {},
-					["core.norg.qol.toc"] = {},
-					["core.norg.dirman"] = {
-						config = {
-							workspaces = {
-								home = "~/neorg",
-							}
-						},
-						autochdir = true,
-						index = "index.norg",
-					},
-					["core.norg.journal"] = {
-						config = {
-							workspace = "home",
-						}
-					},
-				}
-			}
-		end,
-	},
-
-	{
-		"nvim-treesitter/nvim-treesitter",
-		config = function()
-			require('nvim-treesitter.configs').setup {
-				ensure_installed = {
-					"norg",
-				},
-				highlight = {
-					enable = true,
-				},
-				indent = {
-					enable = true,
-				},
-			}
-		end,
-	},
 	-- Other plugins
 	{
-		"tpope/vim-fugitive",
-		lazy = true,
-		event = { 'BufRead', 'BufNewFile' },
-	},
-
-	{
-		"rebelot/kanagawa.nvim",
+		"mcchrish/zenbones.nvim",
 		lazy = true,
 		priority = 1000,
+		dependencies = { "rktjmp/lush.nvim" },
+
 	},
 
 	{
@@ -142,12 +92,12 @@ local plugins = {
 		lazy = true,
 		dependencies = { "nvim-lua/plenary.nvim" },
 		keys = {
-			{ "[", ":Telescope lsp_definitions<CR>", mode = "n" },
+			{ "[",     ":Telescope lsp_definitions<CR>",      mode = "n" },
 			{ "<C-[>", ":Telescope lsp_type_definitions<CR>", mode = "n" },
-			{ "]", ":Telescope lsp_references<CR>", mode = "n" },
-			{ "'", ":Telescope diagnostics bufnr=0<CR>", mode = "n" },
-			{ "''", ":Telescope diagnostics<CR>", mode = "n" },
-			{ "fg", ":Telescope live_grep<CR>", mode = "n" },
+			{ "]",     ":Telescope lsp_references<CR>",       mode = "n" },
+			{ "'",     ":Telescope diagnostics bufnr=0<CR>",  mode = "n" },
+			{ "''",    ":Telescope diagnostics<CR>",          mode = "n" },
+			{ "fg",    ":Telescope live_grep<CR>",            mode = "n" },
 		},
 		config = function()
 			local builtin_config = function(initial_mode)
@@ -228,16 +178,11 @@ local plugins = {
 	},
 
 	{
-		"tpope/vim-fugitive",
-		lazy = true,
-		event = { 'BufRead', 'BufNewFile' },
-	},
-
-	{
 		"lukas-reineke/indent-blankline.nvim",
 		lazy = true,
 		event = { 'BufRead', 'BufNewFile' },
 	},
+
 	{
 		"lsp_lines",
 		url = "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
@@ -269,7 +214,9 @@ require("lazy").setup(plugins, {
 })
 
 -- Colorscheme
-vim.cmd [[ colorscheme kanagawa ]]
+vim.opt.background = "dark"
+vim.g.zenbones_compat = true
+vim.cmd [[ colorscheme zenwritten ]]
 
 -- Other settings
 vim.opt.nu = true
