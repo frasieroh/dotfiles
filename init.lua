@@ -248,11 +248,14 @@ local plugins = {
 		},
 		event = { 'BufRead', 'BufNewFile' },
 		config = function()
-			require("lsp_lines").setup()
+			local lsp_lines = require("lsp_lines")
 			vim.diagnostic.config {
 				virtual_text = false,
 				virtual_lines = true,
 			}
+			lsp_lines.setup {}
+			-- Collapse by default
+			lsp_lines.toggle {}
 		end,
 	},
 
